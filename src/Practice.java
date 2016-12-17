@@ -1,9 +1,5 @@
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.HashSet;
 
 public class Practice {
 	
@@ -55,10 +51,34 @@ public class Practice {
 		}
 	}
 	
+	public static int findMaxSubArraySum(int [] input) {
+		int curr = 0, max = Integer.MIN_VALUE;
+		boolean hasAllNeg = true;
+		for(int i = 0; i < input.length; i++) {
+			if(input[i] >= 0) hasAllNeg = false;
+			
+			if(hasAllNeg) {
+				if(input[i] > max) max = input[i];
+			}
+			else {
+				curr += input[i];
+				if(curr < 0) curr = 0;
+				if(max < curr) max = curr;
+			}
+		}
+		
+		return max;
+	}
+	
 	public static void main(String[] args) {
 		//int [] array = {1,6,3,4,5,2,7};
 		//int [] array = {2,86,5,13,10,7,24,4,90};
 		//System.out.println(Practice.canBeSortedByReverse(array));
-		System.out.println(nonReducibleFractions(4));
+		//System.out.println(nonReducibleFractions(4));
+		
+		int [] input = {-2,-3,-9};
+		System.out.println(findMaxSubArraySum(input));
+		
+		
 	}
 }
